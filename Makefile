@@ -247,6 +247,12 @@ lint:
 	make -C go lint
 	make -C python lint
 
+.PHONY: license-lint
+license-lint: ## Check all dependency licenses for compliance
+	make -C go license-lint
+	make -C ui license-check
+	make -C python license-check
+
 .PHONY: controller-manifests
 controller-manifests:
 	make -C go manifests

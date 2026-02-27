@@ -55,6 +55,12 @@ govulncheck:
 	go mod tidy -v
 	./bin/govulncheck-latest ./...
 
+.PHONY: license-lint
+license-lint: $(LOCALBIN) ## Run license-lint to check Go module dependency licenses
+	$(call go-install-tool,$(LICENSE_LINT),istio.io/tools/cmd/license-lint,$(LICENSE_LINT_VERSION))
+	go mod download
+	$(LICENSE_LINT) -config hack/license-lint.yml
+
 ##@ Build
 
 bin/kagent-local:
@@ -130,6 +136,7 @@ KUBECTL ?= kubectl
 CONTROLLER_GEN ?= $(LOCALBIN)/controller-gen
 ENVTEST ?= $(LOCALBIN)/setup-envtest
 GOLANGCI_LINT = $(LOCALBIN)/golangci-lint
+LICENSE_LINT = $(LOCALBIN)/license-lint
 
 ## Tool Versions
 CONTROLLER_TOOLS_VERSION ?= v0.19.0
@@ -138,6 +145,7 @@ ENVTEST_VERSION ?= $(shell go list -m -f "{{ .Version }}" sigs.k8s.io/controller
 #ENVTEST_K8S_VERSION is the version of Kubernetes to use for setting up ENVTEST binaries (i.e. 1.31)
 ENVTEST_K8S_VERSION ?= $(shell go list -m -f "{{ .Version }}" k8s.io/api | awk -F'[v.]' '{printf "1.%d", $$3}')
 GOLANGCI_LINT_VERSION ?= v2.7.2
+LICENSE_LINT_VERSION ?= latest
 
 .PHONY: controller-gen
 controller-gen: $(CONTROLLER_GEN) ## Download controller-gen locally if necessary.

@@ -359,3 +359,65 @@ jobs:
             exit 1
           fi
           echo "✓ Controller manifests are up to date"
+
+  go-license-lint:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.25"
+          cache: true
+          cache-dependency-path: go/go.sum
+
+      - name: Run license-lint
+        working-directory: go
+        run: make license-lint
+
+  ui-license-check:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: "npm"
+          cache-dependency-path: ui/package-lock.json
+
+      - name: Install dependencies
+        working-directory: ./ui
+        env:
+          CYPRESS_INSTALL_BINARY: 0
+        run: npm ci
+
+      - name: Run license check
+        working-directory: ./ui
+        run: npm run license-check
+
+  python-license-check:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Install python
+        run: uv python install 3.13
+
+      - name: Run license check
+        working-directory: ./python
+        run: make license-check

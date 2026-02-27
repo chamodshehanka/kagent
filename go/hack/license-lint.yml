@@ -1,0 +1,102 @@
+# License configuration for istio.io/tools/cmd/license-lint
+# See: https://pkg.go.dev/istio.io/tools/cmd/license-lint
+#
+# unrestricted_licenses: licenses that are fine to use and modify freely
+# reciprocal_licenses: licenses that require sharing modifications (use with caution)
+# restricted_licenses: licenses that CANNOT be used in this project
+# allowlisted_modules: specific modules exempted from the check (with justification)
+
+unrestricted_licenses:
+  - Apache-2.0
+  - MIT
+  - BSD-1-Clause
+  - BSD-2-Clause
+  - BSD-3-Clause
+  - ISC
+  - CC-BY-3.0
+  - CC-BY-4.0
+  - CC0-1.0
+  - 0BSD
+  - AFL-2.1
+  - AFL-3.0
+  - Artistic-2.0
+  - Apache-1.1
+  - FTL
+  - LPL-1.02
+  - MS-PL
+  - NCSA
+  - OpenSSL
+  - PHP-3.0
+  - TCP-wrappers
+  - W3C
+  - Xnet
+  - Zlib
+  - Unlicense
+  - Unicode-DFS-2016
+
+reciprocal_licenses:
+  - APSL-2.0
+  - CDDL-1.0
+  - CDDL-1.1
+  - CPL-1.0
+  - EPL-1.0
+  - IPL-1.0
+  - MPL-1.0
+  - MPL-1.1
+  - MPL-2.0
+  - MPL-2.0-no-copyleft-exception
+  - Ruby
+
+restricted_licenses:
+  - GPL-1.0-only
+  - GPL-1.0-or-later
+  - GPL-2.0-only
+  - GPL-2.0-or-later
+  - GPL-3.0-only
+  - GPL-3.0-or-later
+  - LGPL-2.0-only
+  - LGPL-2.0-or-later
+  - LGPL-2.1-only
+  - LGPL-2.1-or-later
+  - LGPL-3.0-only
+  - LGPL-3.0-or-later
+  - NPL-1.0
+  - NPL-1.1
+  - OSL-1.0
+  - OSL-1.1
+  - OSL-2.0
+  - OSL-2.1
+  - OSL-3.0
+  - QPL-1.0
+  - Sleepycat
+  - AGPL-1.0-only
+  - AGPL-1.0-or-later
+  - AGPL-3.0-only
+  - AGPL-3.0-or-later
+
+allowlisted_modules:
+# MIT: https://github.com/ghodss/yaml/blob/master/LICENSE
+- github.com/ghodss/yaml
+
+# BSD: https://github.com/gogo/protobuf/blob/master/LICENSE
+- github.com/gogo/protobuf
+
+# MIT: https://github.com/kubernetes-sigs/yaml/blob/master/LICENSE
+- sigs.k8s.io/yaml
+
+# Simplified BSD (BSD-2-Clause): https://github.com/russross/blackfriday/blob/master/LICENSE.txt
+- github.com/russross/blackfriday
+- github.com/russross/blackfriday/v2
+
+# W3C Test Suite License, W3C 3-clause BSD License
+# gonum uses this for its some of its test files
+- gonum.org/v1/gonum
+
+# BSD 3-clause: https://github.com/go-git/gcfg/blob/main/LICENSE
+- github.com/go-git/gcfg
+
+# MPL-2.0 / BSD dual-licensed
+- github.com/cyphar/filepath-securejoin
+
+# MIT: https://github.com/invopop/yaml/blob/v0.1.0/LICENSE
+- github.com/invopop/yaml

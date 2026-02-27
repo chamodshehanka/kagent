@@ -30,6 +30,12 @@ audit: build
 	uv run pip-audit --version || uv pip install pip-audit
 	uv run pip-audit
 
+.PHONY: license-check
+license-check: ## Check Python dependency licenses for compliance
+	uv sync --all-extras
+	uv run pip-licenses --from=mixed --format=table --order=license
+	uv run pip-licenses --from=mixed --fail-on="GNU General Public License v2 (GPLv2);GNU General Public License v2 or later (GPLv2+);GNU General Public License v3 (GPLv3);GNU General Public License v3 or later (GPLv3+);GNU Affero General Public License v3;GNU Affero General Public License v3 or later (AGPLv3+);GNU Lesser General Public License v2 (LGPLv2);GNU Lesser General Public License v2 or later (LGPLv2+);GNU Lesser General Public License v3 (LGPLv3);GNU Lesser General Public License v3 or later (LGPLv3+)"
+
 .PHONY: basic-langchain-sample
 basic-langchain-sample:
 	docker build . -f samples/langgraph/currency/Dockerfile --tag localhost:5001/langgraph-currency:latest --push
